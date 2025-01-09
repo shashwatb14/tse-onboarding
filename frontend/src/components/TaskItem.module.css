@@ -19,12 +19,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: stretch;
   overflow: hidden;
+  position: relative; /* For positioning the UserTag absolutely */
 }
 
 .textContainer span {
-  width: 100%;
+  width: 44rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -47,4 +47,13 @@
 
 .checked {
   color: var(--color-text-secondary);
+}
+
+.userTagContainer {
+  width: 10rem; /* Fixed width for UserTag */
+  position: absolute;
+  right: 0; /* Aligns the UserTag to the right end */
+  bottom: 0; /* Aligns it at the bottom */
+  display: flex;
+  align-items: center;
 }

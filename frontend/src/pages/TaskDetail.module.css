@@ -20,6 +20,17 @@
   text-overflow: ellipsis;
 }
 
+.assignee {
+  overflow: hidden;
+}
+
+.assignee .content {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .title {
   font: var(--font-title);
 }

@@ -3,12 +3,14 @@ import { Helmet } from "react-helmet-async";
 import { Link, useParams } from "react-router-dom";
 import { Task, getTask } from "src/api/tasks";
 import { Button, Page } from "src/components";
+import { TaskForm } from "src/components/TaskForm";
 
-import styles from "../src/pages/TaskDetail.module.css";
+import styles from "/src/pages/TaskDetail.module.css";
 
 export function TaskDetail() {
   const { id } = useParams<{ id: string }>();
   const [task, setTask] = useState<Task | null>(null);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -34,6 +36,15 @@ export function TaskDetail() {
     }).format(date);
   };
 
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleFormSubmit = (updatedTask: Task) => {
+    setTask(updatedTask);
+    setIsEditing(false);
+  };
+
   return (
     <Page>
       <Helmet>
@@ -42,16 +53,18 @@ export function TaskDetail() {
       <p>
         <Link to="/">Back to home</Link>
       </p>
-      {task ? (
+      {isEditing && task ? (
+        <TaskForm mode="edit" task={task} onSubmit={handleFormSubmit} />
+      ) : task ? (
         <div className={styles.container}>
           <div className={styles.titleRow}>
             <span className={styles.title}>{task.title}</span>
-            <Button label={"Edit task"} />
+            <Button label={"Edit task"} onClick={handleEditClick} />
           </div>
           <div className={styles.field}>
             <p>{task.description ? task.description : "(No description)"}</p>
           </div>
-          <div className={styles.field}>
+          <div className={`${styles.field} ${styles.assignee}`}>
             <span className={styles.label}>Assignee:</span>
             <span className={styles.content}>
               {task.assignee ? task.assignee.name : "Not assigned"}
