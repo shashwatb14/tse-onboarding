@@ -1,5 +1,7 @@
 import { get, handleAPIError, post, put } from "src/api/requests";
 
+import { User } from "../src/api/users";
+
 import type { APIResult } from "src/api/requests";
 
 /**
@@ -13,6 +15,7 @@ export interface Task {
   description?: string;
   isChecked: boolean;
   dateCreated: Date;
+  assignee?: User;
 }
 
 /**
@@ -30,6 +33,7 @@ interface TaskJSON {
   description?: string;
   isChecked: boolean;
   dateCreated: string;
+  assignee?: User;
 }
 
 /**
@@ -46,6 +50,7 @@ function parseTask(task: TaskJSON): Task {
     description: task.description,
     isChecked: task.isChecked,
     dateCreated: new Date(task.dateCreated),
+    assignee: task.assignee,
   };
 }
 
@@ -57,6 +62,7 @@ function parseTask(task: TaskJSON): Task {
 export interface CreateTaskRequest {
   title: string;
   description?: string;
+  assignee?: string;
 }
 
 /**
@@ -69,6 +75,7 @@ export interface UpdateTaskRequest {
   description?: string;
   isChecked: boolean;
   dateCreated: Date;
+  assignee?: string;
 }
 
 /**
