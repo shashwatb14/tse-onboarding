@@ -139,7 +139,7 @@ describe("TaskForm", () => {
       _id: "task123",
       title: "Updated title",
       description: "Updated description",
-      assignee: "", // Include the assignee field
+      assignee: "Not assigned", // Include the assignee field
       isChecked: false,
       dateCreated: mockTask.dateCreated,
     });
