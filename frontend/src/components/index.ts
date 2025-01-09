@@ -8,4 +8,3 @@ export { TaskForm } from "./TaskForm";
 export { TextField } from "./TextField";
 export { TaskItem } from "./TaskItem";
 export { TaskList } from "./TaskList";
-export { UserTag } from "./UserTag";

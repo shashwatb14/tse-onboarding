@@ -5,11 +5,6 @@
   justify-content: flex-start;
   align-items: center;
   column-gap: 0.25rem;
-  transition: background-color 0.3s;
-}
-
-.item:hover {
-  background-color: var(--color-surface);
 }
 
 .textContainer {
@@ -19,12 +14,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: stretch;
   overflow: hidden;
-  position: relative; /* For positioning the UserTag absolutely */
 }
 
 .textContainer span {
-  width: 44rem;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -32,13 +27,6 @@
 
 .title {
   font: var(--font-label);
-  color: inherit;
-  text-decoration: none;
-}
-
-.title:hover {
-  color: inherit;
-  text-decoration: underline;
 }
 
 .description {
@@ -47,13 +35,4 @@
 
 .checked {
   color: var(--color-text-secondary);
-}
-
-.userTagContainer {
-  width: 10rem; /* Fixed width for UserTag */
-  position: absolute;
-  right: 0; /* Aligns the UserTag to the right end */
-  bottom: 0; /* Aligns it at the bottom */
-  display: flex;
-  align-items: center;
 }

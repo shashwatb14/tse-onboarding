@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { Task, updateTask } from "src/api/tasks";
-import { CheckButton, UserTag } from "src/components";
+import { CheckButton } from "src/components";
 import styles from "src/components/TaskItem.module.css";
 
 export interface TaskItemProps {
@@ -17,6 +16,7 @@ export function TaskItem({ task: initialTask }: TaskItemProps) {
     try {
       const result = await updateTask({ ...task, isChecked: !task.isChecked });
       if (result.success) {
+        // Use the previous state to make sure React knows the update is based on the latest state.
         setTask((prevTask) => ({
           ...prevTask,
           isChecked: !prevTask.isChecked,
@@ -34,25 +34,10 @@ export function TaskItem({ task: initialTask }: TaskItemProps) {
     <div className={styles.item}>
       <CheckButton checked={task.isChecked} onPress={handleToggleCheck} disabled={isLoading} />
       <div className={`${styles.textContainer} ${task.isChecked ? styles.checked : ""}`}>
-        <span>
-          <Link to={`/task/${task._id}`} className={styles.title}>
-            {task.title}
-          </Link>
-        </span>
+        <span className={styles.title}>{task.title}</span>
         <span className={styles.description}>
           {task.description && task.description.trim().length > 0 && task.description}
         </span>
-        <div className={styles.userTagContainer}>
-          {task.assignee ? (
-            <UserTag
-              name={task.assignee.name}
-              profilePictureURL={task.assignee.profilePictureURL}
-              className={styles.userTag}
-            />
-          ) : (
-            <UserTag name={"Not assigned"} className={styles.userTag} />
-          )}
-        </div>
       </div>
     </div>
   );
